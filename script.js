@@ -1,37 +1,8 @@
-//Variables. Using strings for the concatenation utility. Global variables are cringe, fix later.
+//Variables. Using strings for the concatenation utility.
 let buffer = '', first = '', second = '', result = '', operation = '';
-
-//calculator functions. 
-function add(){
-    result = parseInt(first) + parseInt(second);
-    return
-}
-function subtract(){
-    result = parseInt(first) - parseInt(second);
-    return
-}
-function multiply(){
-    result = parseInt(first) * parseInt(second);
-    return
-}
-function divide(){
-    result = parseInt(first) / parseInt(second);
-    return
-}
-
-//Controller functions to call the appropriate operating function with the right inputs
-function calculate(){
-    switch (operation){
-        case '+': add();
-        break;
-        case '-': subtract();
-        break;
-        case '*': multiply();
-        break;
-        case '/': divide();
-        break;
-        default: console.log('ERROR'); 
-    }
+//Buffer management functions
+function addToBuffer(input){
+    buffer = buffer + input.toString();
 }
 function pushBuffer(){
     if (first == '') {
@@ -47,20 +18,55 @@ function pushBuffer(){
     else console.log('ERROR');
     return
 }
+//calculate calls the appropriate math function for readability's sake.
+function calculate(a, b, symbol){
+    let c;
+    switch (symbol){
+        case '+': c = add(a, b);
+        break;
+        case '-': c = subtract(a, b);
+        break;
+        case '*': c = multiply(a, b);
+        break;
+        case '/': c = divide(a, b);
+        break;
+        default: console.log('ERROR'); 
+    }
+    return c
+}
+function add(a, b){
+    let c = parseInt(a) + parseInt(b);
+    return c
+}
+function subtract(a, b){
+    let c = parseInt(a) - parseInt(b);
+    return c
+}
+function multiply(a, b){
+    let c = parseInt(a) * parseInt(b);
+    return c
+}
+function divide(a, b){
+    if (b == 0){
+        return 'ERROR'
+    }
+    let c = parseInt(a) / parseInt(b);
+    return c
+}
+//execute() and operate() are the workhorses. execute() is the simple case, called by the '=' key or when moving on to a second operation with both storage variables (first, second) full. After completion it clears all storage variables.
 function execute(){
     if (second == ''){
         pushBuffer();
     }
-    calculate();
+    result = calculate(first, second, operation);
     first = '';
     second = '';
+    operation = '';
     buffer = '';
     console.log(result);
     return
 }
-function addToBuffer(input){
-    buffer = buffer + input.toString();
-}
+//operate() is called whenever an operator key is pressed. It checks the storage variables to determine if execute() must be called to put the result of the existing equation into the first storage variable and the buffer into the second, or simply the buffer into the first. Either way, it saves the operator.
 function operate(input){
     if (buffer != '') pushBuffer();
     if (first != '' && second != ''){
@@ -74,7 +80,6 @@ function operate(input){
     operation = input;
     return
 }
-//end controller functions
 
 const nums = document.querySelectorAll('.num');
 nums.forEach(function(currentBtn){
@@ -93,10 +98,3 @@ equals.addEventListener('click', function(){
     execute();
     second = '';
 });
-/*
-addToBuffer(6);
-pushBuffer();
-addToBuffer(9);
-pushBuffer();
-operate('+');
-execute();*/
