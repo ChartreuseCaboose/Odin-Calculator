@@ -1,22 +1,25 @@
 //Variables. Using strings for the concatenation utility.
 let buffer = '', first = '', second = '', result = '', operation = '';
+let display = document.getElementById("display");
 //Buffer management functions
 function addToBuffer(input){
     buffer = buffer + input.toString();
+    display.textContent = buffer;
 }
 function pushBuffer(){
     if (first == '') {
         first = buffer;
         console.log('I pushed ', buffer);
         buffer = '';
+        display.textContent = first;
     }
     else if (second == ''){
         second = buffer;
         console.log('I pushed ', buffer);
         buffer = '';
+        display.textContent = second;
     }
     else console.log('ERROR');
-    return
 }
 //calculate calls the appropriate math function for readability's sake.
 function calculate(a, b, symbol){
@@ -64,6 +67,7 @@ function execute(){
     operation = '';
     buffer = '';
     console.log(result);
+    display.textContent = result;
     return
 }
 //operate() is called whenever an operator key is pressed. It checks the storage variables to determine if execute() must be called to put the result of the existing equation into the first storage variable and the buffer into the second, or simply the buffer into the first. Either way, it saves the operator.
@@ -80,7 +84,6 @@ function operate(input){
     operation = input;
     return
 }
-
 const nums = document.querySelectorAll('.num');
 nums.forEach(function(currentBtn){
     currentBtn.addEventListener('click', function(){
