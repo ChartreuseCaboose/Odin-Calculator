@@ -1,11 +1,48 @@
-*{
-    background-color: grey;
+html{
+    background: url(math.jpg) no-repeat center center fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
 }
-
+.container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.calculator{
+    display: grid;
+    grid-template-columns: [start] 1fr [line1] 1fr [line2] 1fr [line3] 1fr [line4] 1fr [end];
+    grid-template-rows: [start] 1fr [row1] 1fr [row2] 1fr [row3] 1fr [row4] 1fr [row5] 1fr [row6] 1fr [row7] 1fr [end];
+}
 #display{
-    min-width: 100px;
-    min-height: 20px;
-    color: black;
+    color: white;
     font-size: large;
-    background-color: white;
+    min-width: 100px;
+    background-color: black;
+    grid-column-start: line1;
+    grid-column-end: line4;
+    grid-row-start: row1;
+    grid-row-end: row2;
+}
+#header{
+    grid-area: start / start /  row1 / end;
+}
+#left{
+    grid-area: row1 / start / end / line1;
+}
+#right{
+    grid-area: row1 / line4 / end / end;
+}
+.op{
+    color: blue;
+}
+.equals{
+    color: red;
+}
+.clear{
+    color: black;
+}
+.backspace{
+    color: black;
 }
