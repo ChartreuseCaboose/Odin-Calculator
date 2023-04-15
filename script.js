@@ -19,6 +19,13 @@ function pushBuffer(){
     }
     else console.log('ERROR');
 }
+function decimal(input){
+    if (buffer.includes(input)){
+        return
+    }
+    else addToBuffer(input);
+    return
+}
 function backspace(){
     let last = buffer.length -1;
     buffer = buffer.slice(0, last);
@@ -94,11 +101,16 @@ function operate(input){
     display.textContent = operation;
     return
 }
+//Here be buttons
 const nums = document.querySelectorAll('.num');
 nums.forEach(function(currentBtn){
     currentBtn.addEventListener('click', function(){
         addToBuffer(currentBtn.value);
     })
+});
+const decimalKey = document.querySelector('.dec');
+decimalKey.addEventListener('click', function(){
+    decimal(this.value);
 });
 const ops = document.querySelectorAll('.op');
 ops.forEach(function(currentBtn){
@@ -109,7 +121,7 @@ ops.forEach(function(currentBtn){
 const equals = document.querySelector('.equals');
 equals.addEventListener('click', function(){
     execute();
-    second = '';
+    second = ''
 });
 const clearKey = document.querySelector('.clear');
 clearKey.addEventListener('click', function(){

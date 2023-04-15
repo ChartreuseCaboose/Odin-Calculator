@@ -5,9 +5,14 @@ html{
     -moz-background-size: cover;
     -o-background-size: cover;
 }
+.header{
+    display: flex;
+    justify-content: start;
+    font-size: large;
+}
 .container{
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
 }
 .calculator{
@@ -19,7 +24,7 @@ html{
     color: white;
     font-size: large;
     min-width: 100px;
-    background-color: black;
+    background-color: grey;
     grid-column-start: line1;
     grid-column-end: line4;
     grid-row-start: row1;
